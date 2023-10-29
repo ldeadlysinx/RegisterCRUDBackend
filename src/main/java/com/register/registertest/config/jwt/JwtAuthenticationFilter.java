@@ -30,15 +30,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private final AuthenticationManager authenticationManager;
 
-    // Authentication 객체 만들어서 리턴 => 의존 : AuthenticationManager
-    // 인증 요청시에 실행되는 함수 => /login
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
 
         System.out.println("JwtAuthenticationFilter 실행");
         try {
-            // request에 있는 username과 password를 파싱해서 자바 Object로 받기
+
             ObjectMapper om = new ObjectMapper();
             User user = om.readValue(request.getInputStream(),User.class);
             System.out.println(user);
@@ -48,7 +47,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             //principalDetailsService의 loadUserByUsername() 함수가 실행됨
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
-            //authentication 객체가 session 영역에 저장됨.=> 로그인이 되었다는 뜻
+
             PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
             System.out.println("로그인 완료:"+principalDetails.getUser().getUsername());
 

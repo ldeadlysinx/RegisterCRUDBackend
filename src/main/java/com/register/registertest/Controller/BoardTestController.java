@@ -29,6 +29,12 @@ public class BoardTestController {
         return posts;
     }
 
+    @GetMapping("/Search/{keyword}")
+    public List<BoardEntity> searchPosts(@PathVariable String keyword){
+        List<BoardEntity> posts = boardService.getBoardsKeyword(keyword);
+        return posts;
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<BoardDTO> detail(@PathVariable Long id, Model model){
         BoardDTO boardDTO=boardService.getPost(id);

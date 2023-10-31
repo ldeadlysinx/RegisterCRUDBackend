@@ -31,4 +31,6 @@ public class UserController {
         username=userService.getUsername(principalDetails.getUser());
         return username;
     }
+
+
 }

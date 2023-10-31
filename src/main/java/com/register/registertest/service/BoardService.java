@@ -133,6 +133,11 @@ public class BoardService {
         return posts;
     }
 
+    public List<BoardEntity> getBoardsKeyword(String keyword){
+        List<BoardEntity> posts = boardRepository.findCustomByTitleContaining(keyword);
+        return posts;
+    }
+
     public void saveBoard(BoardEntity boardEntity, User user) {
         boardEntity.setWriter(user.getName());
         boardRepository.save(boardEntity);
